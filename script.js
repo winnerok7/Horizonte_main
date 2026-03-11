@@ -706,11 +706,11 @@ window.addEventListener("load", () => {
     const N = cards.length;
     const CARD_ENTER_Y = window.innerHeight * 0.84;
     const STEP_DISTANCE = window.innerHeight * 1.08;
-    const SCALE_STEP = 0.045;
-    const Y_STEP = 16;
+    const SCALE_STEP = 0.04;
+    const Y_STEP = 26;
 
     const setSectionHeight = () => {
-        section.style.height = `${window.innerHeight + ((N - 1) * STEP_DISTANCE) + window.innerHeight * 0.45}px`;
+        section.style.height = `${(N) * STEP_DISTANCE + window.innerHeight * 0.3}px`;
     };
     setSectionHeight();
     ScrollTrigger.addEventListener('refreshInit', setSectionHeight);
@@ -724,7 +724,7 @@ window.addEventListener("load", () => {
         gsap.set(card, {
             zIndex: i + 1,
             xPercent: -50,
-            yPercent: -50,
+            yPercent: 0,          // карточки закреплены к верху (top: 0)
             y: i === 0 ? 0 : CARD_ENTER_Y,
             scale: 1,
             opacity: 1,
@@ -755,7 +755,7 @@ window.addEventListener("load", () => {
             tl.to(cards[j], {
                 scale: 1 - depth * SCALE_STEP,
                 y: -(depth * Y_STEP),
-                opacity: Math.max(0.18, 1 - depth * 0.18),
+                opacity: Math.max(0.25, 1 - depth * 0.2),
                 ease: 'none',
                 duration: 1,
                 force3D: true,

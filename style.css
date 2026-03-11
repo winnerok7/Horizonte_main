@@ -965,18 +965,17 @@ font-family: 'Apercu Mono';
 .interior-mobile-sticky {
   position: sticky;
   top: 0;
-  height: 120svh;
+  height: 100svh;
   overflow: hidden;
 }
 
 .interior-mobile-card {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 10%;
   width: min(95vw, 420px);
   height: 50vh;
   overflow: hidden;
-  transform: translate(-50%, -50%);
   transform-origin: top center;
   will-change: transform, opacity;
 }
