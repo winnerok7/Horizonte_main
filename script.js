@@ -222,7 +222,7 @@ cardsTl
 
     ScrollTrigger.create({
         trigger: stack,
-        start: 'center 65%',
+        start: 'center 85%',
         once: true,
         onEnter: () => {
             const introTl = gsap.timeline({
