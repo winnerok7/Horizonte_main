@@ -125,7 +125,7 @@ body{
 
 
 .hero{
-    background-image: url('./images/hero.png');
+    background-image: url('./images/herocmp.png');
     object-fit: cover;
       background-size: cover;        /* растягивает на всю секцию */
     background-position: center bottom;    /* центрирует */
@@ -561,7 +561,9 @@ font-family: 'Apercu Mono';
 }
 
 .cards_section{
-  background-image: url('./images/terrace.png');
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),
+    url('./images/terracec.png');
   object-fit: cover;
   background-size: cover;
   background-position: center bottom;
@@ -775,7 +777,7 @@ font-family: 'Apercu Mono';
   line-height: 1.1;
   text-transform: uppercase;
   color: #070707;
-  opacity: 0.5;
+  opacity: 0.9;
   width: 30%;
   margin: 0;
   margin-top: 30px;
@@ -1576,6 +1578,10 @@ font-family: 'Apercu Mono';
   overflow: hidden;
   display: block;
 }
+
+.es2{
+  padding-bottom: 50px;
+}  
 
 @media (min-width: 768px) and (max-width: 1249px) {
   .title_location {
