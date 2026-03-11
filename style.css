@@ -1,3 +1,70 @@
+/* ===== LOADER START — удали этот блок до LOADER END чтобы убрать лоадер ===== */
+
+#page-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: #F9F7F4;
+    overflow: hidden;
+    pointer-events: all;
+}
+
+#loader-sketch-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#loader-sketch-wrap svg {
+    width: min(78%, 1500px);
+    height: auto;
+}
+
+#loader-counter {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: baseline;
+    gap: 0.06em;
+    font-family: 'Canela Web', serif;
+    font-weight: 100;
+    color: #1e1e1e;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+}
+
+#loader-num {
+    font-size: clamp(36px, 5vw, 72px);
+}
+
+#loader-pct {
+    font-size: clamp(16px, 2.2vw, 32px);
+    opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+    #loader-sketch-wrap svg {
+        width: auto;
+        height: 80vh;
+    }
+
+    #loader-num {
+        font-size: 13vw;
+    }
+
+    #loader-pct {
+        font-size: 6vw;
+    }
+}
+
+/* ===== LOADER END ===== */
+
 @font-face {
     font-family: 'Apercu Mono';
     src: url('./fonts/apercu-mono-light.woff') format('woff');

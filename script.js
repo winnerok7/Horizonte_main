@@ -1,3 +1,83 @@
+/* ===== LOADER START — удали этот блок до LOADER END чтобы убрать лоадер ===== */
+(function initLoader() {
+    const DURATION  = 3.5; // секунд — длительность лоадера
+    const FADE_OUT  = 0.55; // секунд — плавное исчезновение
+
+    const loader = document.getElementById('page-loader');
+    const numEl  = document.getElementById('loader-num');
+    if (!loader || !numEl) return;
+
+    // Блокируем скролл на время лоадера
+    document.documentElement.style.overflow = 'hidden';
+
+    // Счётчик процентов через GSAP
+    const proxy = { n: 0 };
+    gsap.to(proxy, {
+        n: 100,
+        duration: DURATION,
+        ease: 'power1.inOut',
+        onUpdate() {
+            numEl.textContent = Math.floor(proxy.n);
+        },
+        onComplete() {
+            numEl.textContent = '100';
+            gsap.to(loader, {
+                opacity: 0,
+                duration: FADE_OUT,
+                delay: 0.08,
+                ease: 'power2.inOut',
+                onComplete() {
+                    loader.remove();
+                    document.documentElement.style.overflow = '';
+                    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+                    if (typeof tl !== 'undefined') tl.play();
+                }
+            });
+        }
+    });
+
+    // Загружаем SVG и анимируем пути — эффект отрисовки в разных местах
+    fetch('./images/sketch2.svg')
+        .then(function(r) { return r.text(); })
+        .then(function(svgText) {
+            const wrap = document.getElementById('loader-sketch-wrap');
+            if (!wrap) return;
+
+            wrap.innerHTML = svgText;
+            const svg = wrap.querySelector('svg');
+            if (!svg) return;
+
+            // Убираем лишние атрибуты размера, оставляем viewBox
+            svg.removeAttribute('width');
+            svg.removeAttribute('height');
+            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+            // opacity 10%, цвет линий #7A8E90
+            const group = svg.querySelector('g');
+            if (group) group.setAttribute('opacity', '0.15');
+            svg.querySelectorAll('path').forEach(function(p) { p.setAttribute('fill', '#7A8E90'); });
+
+            const paths = Array.prototype.slice.call(svg.querySelectorAll('path'));
+
+            // Стагер-анимация путей в случайном порядке — эффект "отрисовки в разных местах"
+            gsap.fromTo(paths,
+                { opacity: 0 },
+                {
+                    opacity: 1,
+                    duration: 0.4,
+                    ease: 'sine.out',
+                    stagger: {
+                        amount: DURATION * 0.78,
+                        from: 'random',
+                        ease: 'none'
+                    }
+                }
+            );
+        })
+        .catch(function(err) { console.warn('[Loader] SVG не загружен:', err); });
+})();
+/* ===== LOADER END ===== */
+
 gsap.registerPlugin(ScrollTrigger);
 
 // Disable browser scroll restoration — we handle it manually below
@@ -25,7 +105,8 @@ window.addEventListener('pagehide', () => {
 });
 
 // Entry animation: сначала header, потом title
-const tl = gsap.timeline();
+// paused: true — запускается вручную после завершения лоадера
+const tl = gsap.timeline({ paused: true });
 
 tl.from(".header", {
     duration: 0.8,
