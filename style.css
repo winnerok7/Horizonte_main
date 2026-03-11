@@ -1,0 +1,1994 @@
+@font-face {
+    font-family: 'Apercu Mono';
+    src: url('./fonts/apercu-mono-light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Apercu Mono';
+    src: url('./fonts/apercu-mono-regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Apercu';
+    src: url('./fonts/apercu/apercupro-thin.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Apercu';
+    src: url('./fonts/apercu/apercupro-light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Apercu';
+    src: url('./fonts/apercu/apercupro-regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Apercu';
+    src: url('./fonts/apercu/apercupro-medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+	font-family: 'Canela Web';
+	src: url('./fonts/Canela-Thin-Web.woff2') format('woff2'),
+		 url('./fonts/Canela-Thin-Web.woff') format('woff');
+	font-weight: 100;
+	font-style: normal;
+	}
+
+.Canela-Thin-Web {
+	font-family: 'Canela Web';
+	font-weight: 100;
+	font-style: normal;
+	}
+
+
+/* ===== CSS RESET ===== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+
+
+/* ===== MAIN CODE ===== */
+
+body{
+  background-color: #f5f3ef;
+}
+
+
+.main{
+    background-color: #f5f3ef;
+}
+
+
+.hero{
+    background-image: url('./images/hero.png');
+    object-fit: cover;
+      background-size: cover;        /* растягивает на всю секцию */
+    background-position: center bottom;    /* центрирует */
+    background-repeat: no-repeat;  /* убирает повтор */
+    min-height: 100vh;
+    color: white;
+
+     display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+/* ===== HEADER (внутри hero) ===== */
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; 
+  align-items: start;
+  padding: 15px 30px;
+
+  color: rgba(255,255,255,.85);
+}
+
+/* Left */
+.header-left {
+  justify-self: start;
+}
+
+.header-location {
+    font-family: 'Apercu';
+    letter-spacing: 2%;
+    font-weight: 300;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/* Center (вертикальное меню) */
+.header-center {
+  justify-self: center;
+  text-align: left;
+}
+
+.header-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.header-nav a {
+    font-family: 'Apercu';
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 2%;
+  text-transform: uppercase;
+  transition: opacity .2s ease;
+}
+
+.header-nav a:hover {
+  opacity: 0.7;
+}
+
+/* Right */
+.header-right {
+  justify-self: end;
+}
+
+.header-contact {
+    font-family: 'Apercu';
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2%;
+  text-transform: uppercase;
+  transition: opacity .2s ease;
+}
+
+.header-contact:hover {
+  opacity: 0.7;
+}
+
+body.contact-open {
+  overflow: hidden;
+}
+
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+
+.contact-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.contact-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 12, 14, 0.32);
+}
+
+.contact-modal__panel {
+  position: relative;
+  width: min(760px, 88vw);
+  min-height: min(780px, 82vh);
+  background: #333439;
+  color: #f1f1f2;
+  padding: clamp(22px, 3vw, 44px) clamp(20px, 7vw, 86px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.contact-modal__close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  color: rgba(241, 241, 242, 0.75);
+  font-family: 'Canela Web';
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.contact-modal__eyebrow {
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-family: 'Apercu Mono';
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  opacity: 0.72;
+}
+
+.contact-modal__title {
+  margin: 0;
+  font-family: 'Canela Web';
+  font-size: clamp(46px, 6.1vw, 70px);
+  font-weight: 100;
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+}
+
+.contact-modal__form {
+  margin-top: 68px;
+  margin-bottom: 80px;
+  width: min(560px, 100%);
+}
+
+.contact-field {
+  display: block;
+  margin-bottom: 22px;
+}
+
+.contact-field__input {
+  width: 100%;
+  margin-top: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(241, 241, 242, 0.35);
+  background: transparent;
+  color: #f1f1f2;
+  font-family: 'Apercu Mono';
+  font-size: 14px;
+  line-height: 1.3;
+  padding: 0 2px 8px;
+  outline: none;
+}
+
+.contact-field__input::placeholder {
+  color: rgba(241, 241, 242, 0.88);
+  opacity: 1;
+}
+
+.contact-field__input:focus {
+  border-bottom-color: rgba(241, 241, 242, 0.7);
+}
+
+.contact-modal__submit {
+  margin: 18px auto 0;
+  display: block;
+  min-width: 290px;
+  border: 0;
+  background: #f3f3f3;
+  color: #1f1f21;
+  padding: 14px 26px;
+  font-family: 'Apercu Mono';
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.contact-modal__foot {
+  margin-top: 0;
+  padding-top: 0;
+  text-align: center;
+}
+
+.contact-modal__phone {
+  display: block;
+  font-family: 'Canela Web';
+  font-size: 33px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.contact-modal__mail {
+  display: block;
+  margin-top: 8px;
+  font-family: 'Apercu Mono';
+  font-size: 12px;
+  opacity: 0.86;
+}
+
+.contact-block {
+  background: #f5f3ef;
+  min-height: 100vh;
+  padding: 120px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.contact-modal__panel--static {
+  position: relative;
+  width: min(700px, 72vw);
+  min-height: 760px;
+  padding: 64px 84px 96px;
+  justify-content: center;
+}
+
+.contact-modal__panel--static .contact-modal__eyebrow {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 10px;
+}
+
+.contact-modal__panel--static .contact-modal__title {
+  font-size: clamp(50px, 5.2vw, 74px);
+}
+
+.contact-modal__panel--static .contact-modal__form {
+  width: min(380px, 100%);
+  margin-top: 52px;
+  margin-bottom: 68px;
+}
+
+.contact-modal__panel--static .contact-field {
+  margin-bottom: 18px;
+}
+
+.contact-modal__panel--static .contact-field__input {
+  font-size: 12px;
+}
+
+.contact-modal__panel--static .contact-modal__submit {
+  min-width: 250px;
+  padding: 10px 18px;
+  font-size: 10px;
+}
+
+.contact-modal__panel--static .contact-modal__foot {
+  margin-top: 34px;
+  padding-top: 0;
+}
+
+.contact-modal__panel--static .contact-modal__phone {
+  font-size: 26px;
+}
+
+.contact-modal__panel--static .contact-modal__mail {
+  font-size: 10px;
+}
+
+@media (max-width: 900px) {
+  .contact-block {
+    min-height: 100vh;
+    padding: 64px 14px 0;
+    align-items: flex-end;
+  }
+
+  .contact-modal__panel--static {
+    width: min(700px, 100%);
+    min-height: auto;
+    padding: 40px 26px 54px;
+  }
+
+  .contact-modal__panel--static .contact-modal__form {
+    width: 100%;
+    margin-top: 34px;
+    margin-bottom: 44px;
+  }
+
+  .contact-modal__panel {
+    width: 100%;
+    min-height: auto;
+    max-height: 92vh;
+    overflow-y: auto;
+    padding: 24px 22px 36px;
+  }
+
+  .contact-modal__eyebrow {
+    margin-top: 0;
+  }
+
+  .contact-modal__form {
+    margin-top: 34px;
+  }
+
+  .contact-modal__submit {
+    min-width: 100%;
+    font-size: 12px;
+  }
+
+  .contact-modal__foot {
+    padding-top: 42px;
+  }
+
+  .contact-modal__phone {
+    font-size: 27px;
+  }
+}
+
+.hero-title{
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 70px;
+}
+
+.hero-title-img{
+    width: 93%;
+    opacity: 40%;
+}
+
+.text_section{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: 130vh;
+  padding: 250px 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text_section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('./images/pattern-min.webp') center/cover no-repeat;
+  opacity: 0.9;
+  filter: invert(1);
+}
+
+
+.collection-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.collection-title {
+  font-size: 45px;
+  font-family: 'Canela Web';
+  font-weight: 100;
+  letter-spacing: 7%;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+}
+
+.collection-subtitle {
+  font-size: 16px;
+  font-family: 'Apercu';
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.2;
+  color: #555;
+}
+
+.collection-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Темная кнопка */
+.btn-primary {
+ font-family: 'Apercu Mono';
+  background: #383838;
+  color: #fff;
+  padding: 14px 32px;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 2%;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.8;
+}
+
+/* Нижняя ссылка */
+.btn-link {
+font-family: 'Apercu Mono';
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 2%;
+  text-transform: uppercase;
+  color: #888;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+  transition: opacity 0.3s ease;
+}
+
+.btn-link:hover {
+  opacity: 0.6;
+}
+
+.cards_section{
+  background-image: url('./images/terrace.png');
+  object-fit: cover;
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.info_card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 450px;
+  padding: 30px;
+  background-color: #F9F7F4;
+  width: 535px;
+  position: absolute;
+}
+
+.cards_section .info_card:nth-child(1) {
+  top: 5%;
+  left: 3%;
+}
+
+.cards_section .info_card:nth-child(2) {
+  top: 28%;
+  right: 3%;
+}
+
+.cards_section .info_card:nth-child(3) {
+  top: 52%;
+  left: 26%;
+}
+
+.title_card{
+   font-size: 45px;
+  font-family: 'Canela Web';
+  font-weight: 100;
+  letter-spacing: 5%;
+  line-height: 1.1;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  color: #070707;
+  opacity: 90%;
+
+}
+
+.desc_card{
+  font-family: 'Apercu Mono';
+  color: #191919;
+  opacity: 80%;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 2%;
+  line-height: 1.2;
+}
+
+
+/* ===== LOCATION SECTION (как на скрине) ===== */
+
+.location_section{
+  background: #f5f3ef;            /* светлый тёплый фон */
+  padding: 450px 20px 250px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* Заголовок */
+.title_location{
+  font-size: 75px;
+  font-family: 'Canela Web';
+  font-weight: 100;
+  letter-spacing: 5%;
+  line-height: 1.1;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  color: #070707;
+  margin-bottom: 18px;
+  opacity: 90%;
+}
+
+/* Картинка по центру */
+.image_location{
+  width: 420px;                  /* под пропорции как на скрине */
+  max-width: 70vw;
+  object-fit: contain;
+  height: auto;
+  display: block;
+}
+
+/* Описание снизу */
+.desc_location{
+  max-width: 450px;
+
+  font-family: 'Apercu Mono';
+  color: #191919;
+  opacity: 80%;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 2%;
+  line-height: 1.2;
+  margin: 0;
+}
+
+
+
+
+/* ===== EXTERIOR SECTION ===== */
+
+.exterior_section {
+  background: #f5f3ef;
+  padding: 250px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+/* Строка: counter — стек — nav */
+.exterior-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+.exterior-counter,
+.exterior-nav {
+  font-family: 'Canela Web';
+  font-size: 21px;
+  color: #070707;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  position: absolute;
+  z-index: 30;
+}
+
+.exterior-counter { left: 7vw; }
+.exterior-nav     { right: 7vw; cursor: pointer; }
+
+/* Стек изображений */
+.exterior-stack {
+  position: relative;
+  width: min(1100px, 82vw);
+  height: calc(min(1100px, 82vw) * 0.625 + 60px);
+  overflow: hidden;
+}
+
+.ext-slide {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 60px);
+  object-fit: cover;
+  bottom: 0;
+  left: 0;
+  transform-origin: bottom center;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.ext-slide:nth-child(1) { z-index: 5; opacity: 1; }
+.ext-slide:nth-child(2) { z-index: 4; bottom: 15px; transform: scaleX(0.97); filter: brightness(0.65); opacity: 0.75; }
+.ext-slide:nth-child(3) { z-index: 3; bottom: 35px; transform: scaleX(0.9); filter: brightness(0.45); opacity: 0.55; }
+.ext-slide:nth-child(4) { z-index: 2; bottom: 50px; transform: scaleX(0.83); filter: brightness(0.30); opacity: 0.35; }
+.ext-slide:nth-child(5) { z-index: 1; bottom: 65px; transform: scaleX(0.77); filter: brightness(0.18); opacity: 0.2; }
+
+@media (min-width: 1250px) and (max-width: 1600px) {
+  .exterior-slider {
+    display: block;
+    width: min(1100px, 82vw);
+    margin: 0 auto;
+    padding-bottom: 84px;
+  }
+
+  .exterior-stack {
+    width: 100%;
+  }
+
+  .exterior-counter {
+    left: 0;
+    right: auto;
+    top: calc(100% - 48px);
+  }
+
+  .exterior-nav {
+    right: 0;
+    left: auto;
+    top: calc(100% - 48px);
+  }
+
+  .title_exterior {
+    margin-top: 16px;
+  }
+}
+
+/* Заголовок */
+.title_exterior {
+  font-size: 45px;
+  font-family: 'Canela Web';
+  font-weight: 100;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #070707;
+  opacity: 0.5;
+  width: 30%;
+  margin: 0;
+  margin-top: 30px;
+}
+
+/* Описание */
+.desc_exterior {
+  max-width: 430px;
+  font-family: 'Apercu Mono';
+  color: #191919;
+  opacity: 0.8;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 0;
+}
+
+
+
+
+/* ===== CARD SECTION ===== */
+
+.interior_section {
+  position: relative;
+  height: 100vh;
+  overflow: visible;
+  background: #f5f3ef;
+}
+
+.interior-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.interior_card {
+  position: absolute;
+  left: 50px;
+  right: 50px;
+  top: 70px;
+  bottom: 60px;
+  overflow: hidden;
+  transform-origin: top center;
+  will-change: transform, opacity;
+}
+
+.interior_card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top right,
+    rgba(0, 0, 0, 0.42) 0%,
+    rgba(0, 0, 0, 0.24) 18%,
+    rgba(0, 0, 0, 0.1) 30%,
+    rgba(0, 0, 0, 0) 44%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.interior_card img {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.title_interior {
+  position: absolute;
+  bottom: 28px;
+  left: 40px;
+  font-size: 45px;
+  font-family: 'Canela Web';
+  font-weight: 100;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #ffffff;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.interior-mobile {
+  display: none;
+  background: #f5f3ef;
+}
+
+.interior-mobile-sticky {
+  position: sticky;
+  top: 0;
+  height: 120svh;
+  overflow: hidden;
+}
+
+.interior-mobile-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(95vw, 420px);
+  height: 50vh;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  transform-origin: top center;
+  will-change: transform, opacity;
+}
+
+.interior-mobile-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top right,
+    rgba(0, 0, 0, 0.42) 0%,
+    rgba(0, 0, 0, 0.24) 18%,
+    rgba(0, 0, 0, 0.1) 30%,
+    rgba(0, 0, 0, 0) 44%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.interior-mobile-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.interior-mobile-title {
+  position: absolute;
+  left: 22px;
+  bottom: 18px;
+  z-index: 2;
+  font-size: 28px;
+  font-family: 'Canela Web';
+  font-weight: 100;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #ffffff;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+
+
+
+.section-spacer {
+  height: 45vh;
+  background: #f5f3ef;
+}
+
+
+/* ===== SEA VIEW SECTION ===== */
+
+.sea-section {
+  position: relative;
+  height: calc(100vh + 1200px);
+  overflow: visible;
+  background: #f5f3ef;
+}
+
+.sea-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sea-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  --sea-initial-w: 160px;
+  --sea-text-gap: 18px;
+  z-index: 1;
+}
+
+/* Mask container for bottom-reveal */
+.sea-text-wrap {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  overflow: hidden;
+  display: inline-block;
+  z-index: 1;
+}
+
+.sea-wrapper .sea-text-wrap:first-child {
+  left: calc(50% - (var(--sea-initial-w) / 2) - var(--sea-text-gap));
+  transform: translate(-100%, -50%);
+}
+
+.sea-wrapper .sea-text-wrap:last-child {
+  left: calc(50% + (var(--sea-initial-w) / 2) + var(--sea-text-gap));
+  transform: translate(0, -50%);
+}
+
+/* Текст */
+.sea-text {
+  font-size: 90px;
+  font-family: 'Canela Web';
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #191919;
+  display: block;
+  line-height: 1;
+}
+
+/* Фото по центру между словами */
+.sea-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 110px;
+  object-fit: cover;
+  display: block;
+  flex: 0 0 auto;
+  will-change: width, height;
+  z-index: 2;
+}
+
+.sea-panoramic-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  opacity: 0;
+  font-family: 'Apercu', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.7);
+  padding: 14px 32px;
+  text-decoration: none;
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.sea-panoramic-btn:hover {
+  background: rgba(0,0,0,0.38);
+}
+
+/* ===== PANORAMIC MODAL ===== */
+
+.panoramic-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.panoramic-modal.is-open {
+  display: flex;
+}
+
+.panoramic-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  cursor: pointer;
+}
+
+.panoramic-modal__box {
+  position: relative;
+  z-index: 1;
+  width: min(1400px, 92vw);
+  aspect-ratio: 980 / 550;
+  background: #000;
+}
+
+.panoramic-modal__close {
+  position: absolute;
+  top: -36px;
+  right: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+  opacity: 0.8;
+}
+
+.panoramic-modal__close:hover {
+  opacity: 1;
+}
+
+.panoramic-modal__iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+}
+
+
+
+/* ===== FLOORPLANS SECTION ===== */
+
+.floorplans {
+  background: #f5f3ef;
+  padding: 150px 0px 350px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.floorplans-container {
+  width: 90%;
+  max-width: 1600px;
+}
+
+/* Заголовок */
+.floorplans-title {
+  padding-top: 30vh;
+    font-size: 75px;
+  font-family: 'Canela Web';
+  font-weight: 100;
+  letter-spacing: 5%;
+  line-height: 1.1;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  color: black;
+  opacity: 90%;
+  margin-bottom: 70px;
+}
+
+/* Строка */
+.floorplan-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  align-items: center;
+
+  padding: 18px 0px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Название (первая колонка) */
+.floorplan-name {
+    font-size: 22px;
+  font-family: 'Canela Web';
+  font-weight: 100;
+  letter-spacing: 5%;
+  line-height: 1.1;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  color: black;
+  opacity: 90%;
+  margin-left: 15px;
+}
+
+/* Остальные 3 колонки */
+.floorplan-info {
+  font-size: 14px;
+   font-family: 'Apercu Mono';
+  color: #191919;
+  opacity: 80%;
+  font-weight: 300;
+  letter-spacing: 2%;
+  line-height: 1.2;
+  text-align: right;
+}
+
+.floorplan-price {
+  font-size: 14px;
+   font-family: 'Apercu Mono';
+  color: #191919;
+  opacity: 80%;
+  font-weight: 300;
+  letter-spacing: 2%;
+  line-height: 1.2;
+  text-align: right;
+  margin-right: 15px;
+}
+
+/* Hover эффект строки */
+.floorplan-row:hover {
+  background: rgba(0,0,0,0.02);
+  transition: background 0.3s ease;
+}
+
+
+
+/* ===== FLOORPLAN ACCORDION ===== */
+
+.floorplan-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.floorplan-item .floorplan-row {
+  border-bottom: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  align-items: center;
+  padding: 18px 0;
+}
+
+.floorplan-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 15px 0 20px;
+  color: #191919;
+  line-height: 1;
+}
+
+.toggle-icon {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.floorplan-item.is-open .toggle-icon {
+  transform: rotate(180deg);
+}
+
+.floorplan-panel {
+  height: 0;
+  overflow: hidden;
+}
+
+/* ===== PLAN CARD (accordion inline) ===== */
+
+.plan-card {
+  width: 98%;
+  margin: 18px auto 18px;
+  background: #3b3b3d;
+  padding: 36px 48px 48px;
+  color: #f5f5f2;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Unit number — top left corner */
+.plan-card__unit {
+  font-family: 'Apercu Mono', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  opacity: 0.5;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Body: 3 equal columns — plan1 | plan2 | info */
+.plan-card__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+/* plans wrapper becomes invisible to grid — children participate directly */
+.plan-card__plans {
+  display: contents;
+}
+
+.plan-card__plan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.plan-card__image {
+  display: block;
+  width: 100%;
+  height: 360px;
+  object-fit: contain;
+}
+
+.plan-card__caption {
+  font-family: 'Apercu Mono', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* RIGHT: info column — centered */
+.plan-card__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  min-height: 360px;
+  text-align: center;
+}
+
+.plan-card__label {
+  font-family: 'Apercu Mono', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  opacity: 0.55;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Stats: big Canela lines */
+.plan-card__stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.plan-card__stat {
+  font-family: 'Canela Web';
+  font-weight: 100;
+  font-size: 38px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.plan-card__stat .stat-num {
+  font-size: 45px;
+}
+
+.plan-card__stat sup {
+  font-size: 0.4em;
+  vertical-align: super;
+}
+
+/* Book link */
+.plan-card__book {
+  font-family: 'Apercu Mono', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #f5f5f2;
+  opacity: 0.75;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.plan-card__book:hover {
+  opacity: 1;
+}
+
+
+
+
+/* ===== AMENITY SECTION ===== */
+
+.amenity{
+  background: #f5f3ef;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.amenity-inner{
+  width: 98%;
+  height: 90vh;
+  display: grid;
+  grid-template-columns: 45vw 1fr;
+  gap: 90px;
+  align-items: center;
+}
+
+/* ===== LEFT (IMAGE VIEWPORT) ===== */
+
+.amenity-media{
+  height: 93vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.amenity-track{
+  display: flex;
+  height: 100%;
+
+  /* активное первое фото */
+  transform: translateX(0%);
+}
+
+.amenity-img{
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.amenity-content{
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== RIGHT (TEXT) ===== */
+
+.amenity-info{
+  height: 95%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  text-align: center;
+}
+
+.amenity-tag {
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #888;
+  font-family: 'Canela Web';
+  font-weight: 100;
+  line-height: 1.1;
+  margin-top: 8px;
+  opacity: 0.45;
+  transition: font-size 0.5s ease, opacity 0.5s ease, color 0.5s ease;
+}
+
+.amenity-tag.active {
+  font-size: 45px;
+  color: #111;
+  opacity: 1;
+}
+
+.amenity-note, .amenity-counter{
+  font-size: 14px;
+   font-family: 'Apercu Mono';
+  color: #191919;
+  opacity: 80%;
+  font-weight: 300;
+  letter-spacing: 2%;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* ===== ADAPTIVE ===== */
+
+@media (max-width: 900px){
+  .amenity-inner{
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .amenity-media,
+  .amenity-info{
+    height: 450px;
+  }
+
+  .amenity-inner {
+    gap: 22px;
+  }
+
+  .amenity-info {
+    justify-content: flex-start;
+    gap: 70px;
+  }
+
+  .amenity-tag {
+    font-size: 18px;
+    margin-top: 4px;
+  }
+
+  .amenity-tag.active {
+    font-size: 36px;
+  }
+}
+
+
+
+.video-hero{
+  position: relative;
+  height: 250vh;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 400px;
+
+  background: url('./images/Penthouse.jpeg') center/cover no-repeat;
+}
+
+/* Видео */
+.video-bg{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* затемнение */
+.video-hero::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 2;
+}
+
+/* Контент */
+.video-overlay{
+  position: relative;
+  z-index: 3;
+
+  height: 100%;
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 320px;
+  padding-bottom: 220px; /* равные расстояния */
+  color: white;
+}
+
+/* Текстовые блоки */
+
+.text-block{
+  max-width: 550px;
+}
+
+.text-block.left{
+  align-self: flex-start;
+  text-align: left;
+  
+}
+
+.text-block.right{
+  align-self: flex-end;
+  text-align: right;
+}
+
+.text-block.center{
+  align-self: center;
+  text-align: center;
+}
+
+.text-block.big h2{
+  font-size: 75px;
+   font-family: 'Canela Web';
+  font-weight: 100;
+  letter-spacing: 5%;
+  line-height: 1.1;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  color: white;
+  opacity: 90%;
+}
+
+.text-block h3,
+.text-block h4{
+  font-size: 45px;
+   font-family: 'Canela Web';
+  font-weight: 100;
+  letter-spacing: 5%;
+  line-height: 1.1;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  color: white;
+  opacity: 90%;
+  margin-bottom: 8px;
+}
+
+.text-block p{
+   font-size: 14px;
+   font-family: 'Apercu Mono';
+  color: white;
+  opacity: 80%;
+  font-weight: 300;
+  letter-spacing: 2%;
+  line-height: 1.2;
+}
+
+.video-block-reveal-mask{
+  overflow: hidden;
+  display: block;
+}
+
+@media (min-width: 768px) and (max-width: 1249px) {
+  .title_location {
+    font-size: 50px;
+  }
+
+  .exterior-slider {
+    display: block;
+    width: min(1100px, 82vw);
+    margin: 0 auto;
+    padding-bottom: 84px;
+  }
+
+  .exterior-stack {
+    width: 100%;
+  }
+
+  .exterior-counter {
+    left: 0;
+    right: auto;
+    top: calc(100% - 48px);
+  }
+
+  .exterior-nav {
+    right: 0;
+    left: auto;
+    top: calc(100% - 48px);
+  }
+
+  .title_exterior {
+    margin-top: 16px;
+  }
+
+  .plan-card__stat {
+    font-size: 24px;
+  }
+
+  .plan-card__stat .stat-num {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    min-height: 100svh;
+    background-position: center center;
+  }
+
+  .header {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    padding: 18px 24px 0;
+  }
+
+  .header-left {
+    display: none;
+  }
+
+  .header-center {
+    justify-self: start;
+  }
+
+  .header-nav {
+    gap: 4px;
+  }
+
+  .header-nav a,
+  .header-contact {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .header-right {
+    justify-self: end;
+    align-self: start;
+  }
+
+  .hero-title {
+    align-items: flex-end;
+    margin-bottom: 28px;
+    padding: 0 24px;
+  }
+
+  .hero-title-img {
+    width: 100%;
+    opacity: 0.45;
+  }
+
+  .text_section {
+    height: 105vh;
+    padding: 140px 24px;
+  }
+
+  .collection-inner {
+    max-width: 320px;
+  }
+
+  .collection-title {
+    font-size: 36px;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .collection-subtitle {
+    max-width: 250px;
+    font-size: 10px;
+    line-height: 1.2;
+    margin-bottom: 26px;
+  }
+
+  .collection-buttons {
+    gap: 10px;
+  }
+
+  .btn-primary,
+  .btn-link {
+    font-size: 10px;
+  }
+
+  .btn-primary {
+    padding: 10px 18px;
+  }
+
+  .btn-link {
+    padding-bottom: 2px;
+  }
+
+  .cards_section {
+    min-height: 100svh;
+    background-position: center center;
+  }
+
+  .info_card {
+    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
+    height: 44vh;
+    min-height: 320px;
+    max-height: 380px;
+    padding: 22px 20px;
+  }
+
+  .cards_section .info_card:nth-child(1) {
+    top: 6%;
+    left: 8%;
+  }
+
+  .cards_section .info_card:nth-child(2) {
+    top: 46%;
+    right: 4%;
+  }
+
+  .cards_section .info_card:nth-child(3) {
+    top: 79%;
+    left: 22%;
+  }
+
+  .title_card {
+    font-size: 28px;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+  }
+
+  .desc_card {
+    font-size: 12px;
+    line-height: 1.18;
+  }
+
+  .location_section {
+    padding: 120px 24px 110px;
+    gap: 18px;
+  }
+
+  .title_location {
+    font-size: 36px;
+    line-height: 1.02;
+    margin-bottom: 0;
+  }
+
+  .image_location {
+    width: min(400px, 70vw);
+    max-width: 400px;
+  }
+
+  .desc_location {
+    max-width: 310px;
+    font-size: 12px;
+    line-height: 1.15;
+  }
+
+  .exterior_section {
+    padding: 120px 8px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .exterior-slider {
+    display: contents;
+  }
+
+  .exterior-stack {
+    order: 1;
+    width: 100%;
+    max-width: min(97vw, 420px);
+    height: calc(min(97vw, 420px) * 0.78);
+  }
+
+  .ext-slide {
+    height: calc(100% - 28px);
+  }
+
+  .ext-slide:nth-child(2) {
+    bottom: 8px;
+  }
+
+  .ext-slide:nth-child(3) {
+    bottom: 16px;
+  }
+
+  .ext-slide:nth-child(4) {
+    bottom: 24px;
+  }
+
+  .ext-slide:nth-child(5) {
+    bottom: 32px;
+  }
+
+  .exterior-counter {
+    display: none;
+  }
+
+  .exterior-nav {
+    order: 4;
+    position: static;
+    width: min(97vw, 420px);
+    margin-top: 8px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .title_exterior {
+    order: 2;
+    margin-top: 0;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .desc_exterior {
+    order: 3;
+    max-width: 300px;
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .interior_section {
+    display: none;
+  }
+
+  .interior-mobile {
+    display: block;
+  }
+
+  .section-spacer {
+    height: 24vh;
+  }
+
+  .sea-text {
+    font-size: 36px;
+  }
+
+  .sea-sticky {
+    height: 115vh;
+  }
+
+  .floorplans {
+    padding: 110px 14px 180px;
+  }
+
+  .floorplans-container {
+    width: 100%;
+  }
+
+  .floorplans-title {
+    font-size: 36px;
+    margin-bottom: 34px;
+    text-align: center;
+  }
+
+  .floorplan-item .floorplan-row {
+    grid-template-columns: minmax(0, 1fr) auto auto auto auto;
+    gap: 10px;
+    padding: 14px 0;
+  }
+
+  .floorplan-name {
+    margin-left: 0;
+    font-size: 14px;
+  }
+
+  .floorplan-info,
+  .floorplan-price,
+  .floorplan-toggle {
+    font-size: 10px;
+  }
+
+  .floorplan-price {
+    margin-right: 0;
+  }
+
+  .floorplan-toggle {
+    padding: 0 2px 0 8px;
+  }
+
+  .toggle-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .plan-card {
+    width: 100%;
+    margin: 12px auto 16px;
+    padding: 18px 10px 28px;
+  }
+
+  .plan-card__unit {
+    margin-bottom: 8px;
+    text-align: left;
+  }
+
+  .plan-card__body {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .plan-card__plans {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+
+  .plan-card__plan {
+    gap: 8px;
+    justify-content: start;
+  }
+
+  .plan-card__image {
+    width: 100%;
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
+  }
+
+  .plan-card__caption {
+    font-size: 9px;
+  }
+
+  .plan-card__info {
+    min-height: auto;
+    margin-top: 18px;
+    gap: 26px;
+    justify-content: flex-start;
+    text-align: center;
+  }
+
+  .plan-card__label {
+    font-size: 9px;
+  }
+
+  .plan-card__stats {
+    gap: 8px;
+  }
+
+  .plan-card__stat {
+    font-size: 18px;
+  }
+
+  .plan-card__stat .stat-num {
+    font-size: 28px;
+  }
+
+  .plan-card__book {
+    font-size: 9px;
+  }
+
+  .video-hero {
+    height: 190vh;
+    margin-top: 180px;
+  }
+
+  .video-overlay {
+    width: 100%;
+    padding: 140px 18px 120px;
+  }
+
+  .text-block {
+    max-width: 290px;
+  }
+
+  .text-block.big h2 {
+    font-size: 36px;
+  }
+
+  .text-block h3,
+  .text-block h4 {
+    font-size: 24px;
+  }
+
+  .text-block p {
+    font-size: 10px;
+  }
+}
+
