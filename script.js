@@ -329,6 +329,11 @@ cardsTl
 
     btnNext.addEventListener('click', goNext);
     btnBack.addEventListener('click', goBack);
+
+    const arrowBack = document.querySelector('.ext-arrow--back');
+    const arrowNext = document.querySelector('.ext-arrow--next');
+    if (arrowBack) arrowBack.addEventListener('click', goBack);
+    if (arrowNext) arrowNext.addEventListener('click', goNext);
     updateCounter();
 })();
 
@@ -466,6 +471,7 @@ cardsTl
 (function () {
     const modal = document.getElementById('panoramicModal');
     const btn = document.querySelector('.sea-panoramic-btn');
+    const btnMobile = document.querySelector('.sea-mobile-btn');
     const overlay = modal && modal.querySelector('.panoramic-modal__overlay');
     const closeBtn = modal && modal.querySelector('.panoramic-modal__close');
     const iframe = modal && modal.querySelector('.panoramic-modal__iframe');
@@ -486,6 +492,7 @@ cardsTl
     };
 
     btn.addEventListener('click', openModal);
+    if (btnMobile) btnMobile.addEventListener('click', openModal);
     overlay.addEventListener('click', closeModal);
     closeBtn.addEventListener('click', closeModal);
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
@@ -704,8 +711,8 @@ window.addEventListener("load", () => {
     if (window.innerWidth > 767) return;
 
     const N = cards.length;
-    const CARD_ENTER_Y = window.innerHeight * 0.84;
-    const STEP_DISTANCE = window.innerHeight * 1.08;
+    const CARD_ENTER_Y = window.innerHeight * 1.3; // стартует дальше — карточка точно скрыта, но появляется раньше в процессе скролла
+    const STEP_DISTANCE = window.innerHeight * 1.3;
     const SCALE_STEP = 0.04;
     const Y_STEP = 26;
 

@@ -805,6 +805,8 @@ font-family: 'Apercu Mono';
 .exterior-counter { left: 7vw; }
 .exterior-nav     { right: 7vw; cursor: pointer; }
 
+.ext-arrow { display: none; }
+
 /* Стек изображений */
 .exterior-stack {
   position: relative;
@@ -972,9 +974,9 @@ font-family: 'Apercu Mono';
 .interior-mobile-card {
   position: absolute;
   left: 50%;
-  top: 10%;
+  top: 20%;
   width: min(95vw, 420px);
-  height: 50vh;
+  height: 60vh;
   overflow: hidden;
   transform-origin: top center;
   will-change: transform, opacity;
@@ -1123,6 +1125,12 @@ font-family: 'Apercu Mono';
 
 .sea-panoramic-btn:hover {
   background: rgba(0,0,0,0.38);
+}
+
+/* ===== SEA VIEW MOBILE ===== */
+
+.sea-mobile {
+  display: none;
 }
 
 /* ===== PANORAMIC MODAL ===== */
@@ -1909,23 +1917,43 @@ font-family: 'Apercu Mono';
   }
 
   .exterior-nav {
-    order: 4;
+    order: 2;
     position: static;
     width: min(97vw, 420px);
     margin-top: 8px;
     font-size: 16px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .ext-arrow {
+    display: block;
+    width: 16px;
+    height: auto;
+    cursor: pointer;
+    opacity: 0.75;
+  }
+
+  .ext-arrow--back {
+    transform: rotate(90deg);
+  }
+
+  .ext-arrow--next {
+    transform: rotate(-90deg);
   }
 
   .title_exterior {
-    order: 2;
-    margin-top: 0;
+    order: 3;
+    margin-top: 24px;
     font-size: 28px;
     line-height: 1;
   }
 
   .desc_exterior {
-    order: 3;
+    order: 4;
     max-width: 300px;
     font-size: 12px;
     line-height: 1.2;
@@ -1943,12 +1971,53 @@ font-family: 'Apercu Mono';
     height: 24vh;
   }
 
-  .sea-text {
-    font-size: 36px;
+  .sea-section {
+    display: none;
   }
 
-  .sea-sticky {
-    height: 115vh;
+  .sea-mobile {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100vw;
+    max-height: 90vh;
+    overflow: hidden;
+    background-image: url('./images/view.jpeg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .sea-mobile-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: rgba(0,0,0,0.3);
+  }
+
+  .sea-mobile-title {
+    font-family: 'Canela Web';
+    font-weight: 100;
+    font-size: 32px;
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-align: center;
+    margin: 0;
+    padding: 0 20px;
+  }
+
+  .sea-mobile-btn {
+    font-family: 'Apercu Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: #1a1a1a;
+    background: #fff;
+    border: none;
+    padding: 16px 36px;
+    cursor: pointer;
   }
 
   .floorplans {
@@ -1961,6 +2030,7 @@ font-family: 'Apercu Mono';
 
   .floorplans-title {
     font-size: 36px;
+    padding-top: 15vh;
     margin-bottom: 34px;
     text-align: center;
   }
