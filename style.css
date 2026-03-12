@@ -533,6 +533,7 @@ body.contact-open {
 
   .contact-modal__eyebrow {
     margin-top: 0;
+    padding-top: 50px;
   }
 
   .contact-modal__form {
@@ -1852,7 +1853,7 @@ font-family: 'Apercu Mono';
   }
 
   .location_section {
-    padding: 120px 24px 110px;
+    padding: 210px 24px 110px;
     gap: 18px;
   }
 
@@ -1879,6 +1880,11 @@ font-family: 'Apercu Mono';
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .exterior_section.es2 {
+    padding: 120px 8px 0;
+    margin-bottom: -50px;
   }
 
   .exterior-slider {
