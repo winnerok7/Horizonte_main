@@ -567,7 +567,10 @@ window.addEventListener("load", () => {
     const items = Array.from(document.querySelectorAll('.floorplan-item'));
 
     document.querySelectorAll('.plan-card__image').forEach(img => {
-        if (img.decode) img.decode().catch(() => {});
+        img.loading = 'eager';
+        const preload = new Image();
+        preload.src = img.src;
+        preload.onload = () => { if (img.decode) img.decode().catch(() => {}); };
     });
 
     const isMobile = window.innerWidth <= 767;
