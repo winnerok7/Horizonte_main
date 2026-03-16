@@ -94,11 +94,14 @@ const LENIS_PRESETS = {
     },
 };
 const ACTIVE_LENIS_PRESET = 'smoothTest'; // set 'default' to revert
-const lenis = new Lenis(
-    window.innerWidth <= 767 ? { lerp: 0, touchMultiplier: 0 } : LENIS_PRESETS[ACTIVE_LENIS_PRESET]
-);
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add((time) => lenis.raf(time * 1000));
+let lenis = null;
+if (window.innerWidth > 767) {
+    lenis = new Lenis(LENIS_PRESETS[ACTIVE_LENIS_PRESET]);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+} else {
+    window.addEventListener('scroll', ScrollTrigger.update, { passive: true });
+}
 gsap.ticker.lagSmoothing(0);
 
 // Save scroll position before reload
