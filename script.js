@@ -218,7 +218,7 @@ if (window.innerWidth > 767) {
 
     ScrollTrigger.create({
         trigger: ".location_section",
-        start: "top center",
+        start: window.innerWidth <= 767 ? "top 85%" : "top center",
         once: true,
         onEnter: () => {
             gsap.to(shuffled, {
