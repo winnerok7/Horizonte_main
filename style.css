@@ -451,8 +451,23 @@ body.contact-open {
   min-height: 100vh;
   padding: 120px 0 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.contact-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('./images/pattern-min.webp') top/cover no-repeat;
+  background-position-y: -21%;
+  opacity: 0.9;
+  filter: invert(1);
 }
 
 .contact-modal__panel--static {
@@ -1687,7 +1702,12 @@ font-family: 'Apercu Mono';
 }
 
 .es2{
-  padding-bottom: 50px;
+  padding-top: 130px;
+  padding-bottom: 90px;
+}
+
+.es2 .title_exterior {
+  width: 18%;
 }  
 
 @media (min-width: 768px) and (max-width: 1249px) {
