@@ -585,15 +585,19 @@ window.addEventListener("load", () => {
         row.addEventListener('click', () => {
             const isOpen = item === openItem;
 
+            const isMobile = window.innerWidth <= 767;
+
             // Close currently open item
             if (openItem) {
                 const closingItem = openItem;
                 gsap.to(closingItem.querySelector('.floorplan-panel'), {
                     height: 0, duration: 0.4, ease: 'power2.inOut', overwrite: true,
                     onComplete: () => {
-                        const y = window.scrollY;
-                        ScrollTrigger.refresh();
-                        window.scrollTo(0, y);
+                        if (!isMobile) {
+                            const y = window.scrollY;
+                            ScrollTrigger.refresh();
+                            window.scrollTo(0, y);
+                        }
                     },
                 });
                 closingItem.classList.remove('is-open');
@@ -606,9 +610,11 @@ window.addEventListener("load", () => {
                 gsap.to(panel, {
                     height: 'auto', duration: 0.45, ease: 'power2.inOut', overwrite: true,
                     onComplete: () => {
-                        const y = window.scrollY;
-                        ScrollTrigger.refresh();
-                        window.scrollTo(0, y);
+                        if (!isMobile) {
+                            const y = window.scrollY;
+                            ScrollTrigger.refresh();
+                            window.scrollTo(0, y);
+                        }
                     },
                 });
                 item.classList.add('is-open');
