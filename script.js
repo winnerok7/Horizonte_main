@@ -837,6 +837,18 @@ window.addEventListener("load", () => {
     }
 })();
 
+// amenities nav link: on mobile point to amenities-mobile section
+(function () {
+    if (window.innerWidth > 767) return;
+    const link = document.querySelector('a[href="#amenities"]');
+    if (!link) return;
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.getElementById('amenities-mobile');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+})();
+
 // static bottom contact block: keep form non-submitting until backend is connected
 (function () {
     const forms = document.querySelectorAll('.contact-block .contact-modal__form');
