@@ -561,15 +561,16 @@
                 <div class="contact-modal__eyebrow">SALES OFFICE</div>
                 <h2 class="contact-modal__title" id="contact-block-title">CONTACT US</h2>
 
-                <form class="contact-modal__form" action="#" method="post">
+                <form id="contact-form-bottom" class="contact-modal__form" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="03fa4f19-0750-47ee-b07b-601aa8218097">
                     <label class="contact-field">
-                        <input class="contact-field__input" type="text" name="firstNameBottom" autocomplete="given-name" placeholder="FIRST NAME" aria-label="First name">
+                        <input class="contact-field__input" type="text" name="name" autocomplete="given-name" placeholder="FIRST NAME" aria-label="First name" required>
                     </label>
                     <label class="contact-field">
-                        <input class="contact-field__input" type="tel" name="phoneBottom" autocomplete="tel" placeholder="YOUR NUMBER" aria-label="Your number">
+                        <input class="contact-field__input" type="tel" name="phone" autocomplete="tel" placeholder="YOUR NUMBER" aria-label="Your number">
                     </label>
                     <label class="contact-field">
-                        <input class="contact-field__input" type="email" name="emailBottom" autocomplete="email" placeholder="EMAIL" aria-label="Email">
+                        <input class="contact-field__input" type="email" name="email" autocomplete="email" placeholder="EMAIL" aria-label="Email" required>
                     </label>
 
                     <button class="contact-modal__submit" type="submit">SUBMIT AND SEND YOUR REQUEST</button>
@@ -597,15 +598,16 @@
             <div class="contact-modal__eyebrow">SALES OFFICE</div>
             <h2 class="contact-modal__title" id="contact-modal-title">CONTACT US</h2>
 
-            <form class="contact-modal__form" action="#" method="post">
+            <form id="contact-form-modal" class="contact-modal__form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="03fa4f19-0750-47ee-b07b-601aa8218097">
                 <label class="contact-field">
-                    <input class="contact-field__input" type="text" name="firstName" autocomplete="given-name" placeholder="FIRST NAME" aria-label="First name">
+                    <input class="contact-field__input" type="text" name="name" autocomplete="given-name" placeholder="FIRST NAME" aria-label="First name" required>
                 </label>
                 <label class="contact-field">
                     <input class="contact-field__input" type="tel" name="phone" autocomplete="tel" placeholder="YOUR NUMBER" aria-label="Your number">
                 </label>
                 <label class="contact-field">
-                    <input class="contact-field__input" type="email" name="email" autocomplete="email" placeholder="EMAIL" aria-label="Email">
+                    <input class="contact-field__input" type="email" name="email" autocomplete="email" placeholder="EMAIL" aria-label="Email" required>
                 </label>
 
                 <button class="contact-modal__submit" type="submit">SUBMIT AND SEND YOUR REQUEST</button>
@@ -614,6 +616,19 @@
             <div class="contact-modal__foot">
                 <a href="tel:+34951870700" class="contact-modal__phone">+34(951)870-700</a>
                 <a href="mailto:info@horizonte-village.com" class="contact-modal__mail">info@horizonte-village.com</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success modal -->
+    <div class="contact-modal success-modal" id="success-modal" aria-hidden="true">
+        <div class="contact-modal__overlay" data-success-close></div>
+        <div class="contact-modal__panel success-modal__panel" role="dialog" aria-modal="true">
+            <button class="contact-modal__close" type="button" aria-label="Close" data-success-close>×</button>
+            <div class="success-modal__body">
+                <div class="contact-modal__eyebrow">HORIZONTE</div>
+                <h2 class="contact-modal__title success-modal__title">THANK YOU</h2>
+                <p class="success-modal__text">Your request has been successfully submitted.<br>Our team will be in touch with you shortly.</p>
             </div>
         </div>
     </div>

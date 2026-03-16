@@ -847,6 +847,26 @@ window.addEventListener("load", () => {
     }
 })();
 
+// success modal: close on overlay/button/escape
+(function () {
+    const modal = document.querySelector('#success-modal');
+    if (!modal) return;
+
+    function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        if (lenis) lenis.start();
+    }
+
+    modal.querySelectorAll('[data-success-close]').forEach(el => {
+        el.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+})();
+
 // amenities nav link: on mobile point to amenities-mobile section
 (function () {
     if (window.innerWidth > 767) return;
@@ -859,11 +879,74 @@ window.addEventListener("load", () => {
     });
 })();
 
-// static bottom contact block: keep form non-submitting until backend is connected
+// web3forms: handle all contact forms
 (function () {
-    const forms = document.querySelectorAll('.contact-block .contact-modal__form');
+    const forms = document.querySelectorAll('#contact-form-bottom, #contact-form-modal');
+
+    function getUTMData() {
+        const params = new URLSearchParams(window.location.search);
+        const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+        const result = {};
+        utmKeys.forEach(key => {
+            if (params.get(key)) result[key] = params.get(key);
+        });
+        result['page_url'] = window.location.href;
+        return result;
+    }
+
     forms.forEach((form) => {
-        form.addEventListener('submit', (e) => e.preventDefault());
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(form);
+
+                // append UTM params and full URL (hidden from user)
+                const utmData = getUTMData();
+                Object.entries(utmData).forEach(([key, value]) => {
+                    formData.append(key, value);
+                });
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    form.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    // close contact modal if open
+                    const contactModal = document.querySelector('#contact-modal');
+                    if (contactModal) {
+                        contactModal.classList.remove('is-open');
+                        contactModal.setAttribute('aria-hidden', 'true');
+                        document.body.classList.remove('contact-open');
+                    }
+                    // open success modal
+                    const successModal = document.querySelector('#success-modal');
+                    if (successModal) {
+                        successModal.classList.add('is-open');
+                        successModal.setAttribute('aria-hidden', 'false');
+                        if (lenis) lenis.stop();
+                    }
+                } else {
+                    alert('Error: ' + data.message);
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            } catch (error) {
+                alert('Something went wrong. Please try again.');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
     });
 })();
 
