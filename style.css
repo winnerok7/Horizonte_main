@@ -1466,6 +1466,12 @@ font-family: 'Apercu Mono';
 
 /* ===== AMENITY SECTION ===== */
 
+/* ===== AMENITIES MOBILE ===== */
+.amenities_mobile {
+  display: none;
+}
+
+/* ===== AMENITY DESKTOP ===== */
 .amenity{
   background: #f5f3ef;
   height: 100vh;
@@ -2237,6 +2243,75 @@ font-family: 'Apercu Mono';
 
   .contact-block .contact-modal__panel--static {
     margin-top: 70px;
+  }
+
+  .amenity {
+    display: none;
+  }
+
+  .amenities_mobile {
+    display: block;
+    background: #f5f3ef;
+    padding: 60px 24px 40px;
+  }
+
+  .amenities_mobile__title {
+    font-family: 'Canela Web';
+    font-weight: 100;
+    font-size: 28px;
+    letter-spacing: 0.08em;
+    text-align: center;
+    color: #070707;
+    margin: 0 0 36px;
+  }
+
+  .amenities_mobile__list {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .amenities_mobile__card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .amenities_mobile__img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .amenities_mobile__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .amenities_mobile__tag {
+    font-family: 'Canela Web';
+    font-weight: 100;
+    font-size: 22px;
+    letter-spacing: 0.03em;
+    color: #070707;
+  }
+
+  .amenities_mobile__counter {
+    font-family: 'Apercu Mono';
+    font-size: 10px;
+    color: #191919;
+    opacity: 0.6;
+  }
+
+  .amenities_mobile__note {
+    font-family: 'Apercu Mono';
+    font-size: 11px;
+    color: #191919;
+    opacity: 0.7;
+    line-height: 1.4;
+    margin: 0;
+    width: 60%;
   }
 }
 

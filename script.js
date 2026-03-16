@@ -94,7 +94,9 @@ const LENIS_PRESETS = {
     },
 };
 const ACTIVE_LENIS_PRESET = 'smoothTest'; // set 'default' to revert
-const lenis = new Lenis(LENIS_PRESETS[ACTIVE_LENIS_PRESET]);
+const lenis = new Lenis(
+    window.innerWidth <= 767 ? { lerp: 0, touchMultiplier: 0 } : LENIS_PRESETS[ACTIVE_LENIS_PRESET]
+);
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
@@ -128,20 +130,33 @@ gsap.set([".collection-title", ".collection-subtitle", ".collection-buttons"], {
     y: 40
 });
 
-const textTl = gsap.timeline({
-    scrollTrigger: {
-        trigger: ".text_section",
-        start: "top top",
-        end: "+=900",
-        pin: true,
-        scrub: 1,
-    }
-});
+if (window.innerWidth > 767) {
+    const textTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".text_section",
+            start: "top top",
+            end: "+=900",
+            pin: true,
+            scrub: 1,
+        }
+    });
 
-textTl
-    .to(".collection-title", { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
-    .to(".collection-subtitle", { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "+=0.4")
-    .to(".collection-buttons", { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "+=0.4");
+    textTl
+        .to(".collection-title", { opacity: 1, y: 0, duration: 1, ease: "power2.out" })
+        .to(".collection-subtitle", { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "+=0.4")
+        .to(".collection-buttons", { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "+=0.4");
+} else {
+    ScrollTrigger.create({
+        trigger: ".text_section",
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+            gsap.to(".collection-title", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" });
+            gsap.to(".collection-subtitle", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", delay: 0.2 });
+            gsap.to(".collection-buttons", { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", delay: 0.4 });
+        }
+    });
+}
 
 // cards_section: pin + конвейер снизу вверх насквозь
 if (window.innerWidth > 767) {
@@ -428,6 +443,12 @@ if (window.innerWidth > 767) {
     const seaPanoramicBtn = document.querySelector('.sea-panoramic-btn');
 
     if (!seaSection || !seaImage || !seaText.length) return;
+    if (window.innerWidth <= 767) {
+        gsap.set(seaText, { y: 0, opacity: 1 });
+        gsap.set(seaImage, { opacity: 1 });
+        if (seaPanoramicBtn) gsap.set(seaPanoramicBtn, { opacity: 1 });
+        return;
+    }
     const SEA_SCROLL_DISTANCE = 2000;
     const setSeaHeight = () => {
         seaSection.style.height = `${window.innerHeight + SEA_SCROLL_DISTANCE}px`;
@@ -599,6 +620,8 @@ window.addEventListener("load", () => {
 
 // amenity section: pin + scroll through 4 slides
 (function () {
+    if (window.innerWidth <= 767) return;
+
     const tags    = Array.from(document.querySelectorAll('.amenity-tag'));
     const track   = document.querySelector('.amenity-track');
     const counter = document.querySelector('.amenity-counter');
