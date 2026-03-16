@@ -601,6 +601,7 @@ window.addEventListener("load", () => {
                         onComplete: () => {
                             const y = window.scrollY;
                             ScrollTrigger.refresh();
+                            if (lenis) lenis.resize();
                             window.scrollTo(0, y);
                         },
                     });
@@ -620,6 +621,7 @@ window.addEventListener("load", () => {
                         onComplete: () => {
                             const y = window.scrollY;
                             ScrollTrigger.refresh();
+                            if (lenis) lenis.resize();
                             window.scrollTo(0, y);
                         },
                     });
@@ -726,7 +728,7 @@ window.addEventListener("load", () => {
 (function () {
     const openBtn = document.querySelector('.header-contact');
     const modal = document.querySelector('#contact-modal');
-    if (!openBtn || !modal) return;
+    if (!modal) return;
 
     const closeTargets = modal.querySelectorAll('[data-contact-close]');
     const form = modal.querySelector('form');
@@ -745,9 +747,17 @@ window.addEventListener("load", () => {
         if (typeof lenis !== 'undefined' && lenis?.start) lenis.start();
     }
 
-    openBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal();
+    const triggerBtns = [
+        openBtn,
+        document.querySelector('.btn-primary'),
+        ...Array.from(document.querySelectorAll('.plan-card__book')),
+    ].filter(Boolean);
+
+    triggerBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
     });
 
     closeTargets.forEach((el) => {
