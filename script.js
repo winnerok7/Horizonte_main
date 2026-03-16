@@ -171,7 +171,7 @@ if (window.innerWidth > 767) {
             ease: "power2.out",
             scrollTrigger: {
                 trigger: ".cards_section",
-                start: "top 75%",
+                start: "top 95%",
                 toggleActions: "play none none none",
             },
             delay: i * 0.75,
@@ -566,7 +566,11 @@ window.addEventListener("load", () => {
                 const closingItem = openItem;
                 gsap.to(closingItem.querySelector('.floorplan-panel'), {
                     height: 0, duration: 0.4, ease: 'power2.inOut', overwrite: true,
-                    onComplete: () => ScrollTrigger.refresh(),
+                    onComplete: () => {
+                        const y = window.scrollY;
+                        ScrollTrigger.refresh();
+                        window.scrollTo(0, y);
+                    },
                 });
                 closingItem.classList.remove('is-open');
                 closingItem.querySelector('.toggle-icon').textContent = '˅';
@@ -577,7 +581,11 @@ window.addEventListener("load", () => {
             if (!isOpen) {
                 gsap.to(panel, {
                     height: 'auto', duration: 0.45, ease: 'power2.inOut', overwrite: true,
-                    onComplete: () => ScrollTrigger.refresh(),
+                    onComplete: () => {
+                        const y = window.scrollY;
+                        ScrollTrigger.refresh();
+                        window.scrollTo(0, y);
+                    },
                 });
                 item.classList.add('is-open');
                 icon.textContent = '˄';

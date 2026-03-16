@@ -1861,7 +1861,7 @@ font-family: 'Apercu Mono';
     align-items: center;
     justify-content: center;
     gap: 20px;
-    padding: 60px 24px;
+    padding: 0px 24px 60px;
     overflow: visible;
   }
 
@@ -1942,8 +1942,12 @@ font-family: 'Apercu Mono';
   }
 
   .exterior_section.es2 {
-    padding: 120px 8px 0;
-    margin-bottom: -50px;
+    padding: 60px 8px 40px;
+    margin-bottom: 0;
+  }
+
+  .exterior_section.es2 .title_exterior {
+    width: 55%;
   }
 
   .exterior-slider {
@@ -2222,6 +2226,17 @@ font-family: 'Apercu Mono';
 
   .text-block p {
     font-size: 10px;
+  }
+
+  .contact-block {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px 60px;
+  }
+
+  .contact-block .contact-modal__panel--static {
+    margin-top: 70px;
   }
 }
 
