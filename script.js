@@ -108,7 +108,7 @@ window.addEventListener('pagehide', () => {
 // paused: true — запускается вручную после завершения лоадера
 const tl = gsap.timeline({ paused: true });
 
-tl.from(".header", {
+tl.from([".header", ".hero-location-mob"], {
     duration: 0.8,
     opacity: 0,
     y: -30,
@@ -119,7 +119,8 @@ tl.from(".header", {
     opacity: 0,
     y: 70,
     ease: "power3.out"
-}, "+=0.1");
+}, "+=0.1")
+;
 
 // text_section: pin + последовательное появление блоков
 gsap.set([".collection-title", ".collection-subtitle", ".collection-buttons"], {
@@ -143,22 +144,40 @@ textTl
     .to(".collection-buttons", { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "+=0.4");
 
 // cards_section: pin + конвейер снизу вверх насквозь
-gsap.set(".cards_section .info_card", { y: "110vh" });
+if (window.innerWidth > 767) {
+    gsap.set(".cards_section .info_card", { y: "110vh" });
 
-const cardsTl = gsap.timeline({
-    scrollTrigger: {
-        trigger: ".cards_section",
-        start: "top top",
-        end: "+=3800",
-        pin: true,
-        scrub: 1,
-    }
-});
+    const cardsTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".cards_section",
+            start: "top top",
+            end: "+=3800",
+            pin: true,
+            scrub: 1,
+        }
+    });
 
-cardsTl
-    .to(".cards_section .info_card:nth-child(1)", { y: "-110vh", duration: 2, ease: "none" })
-    .to(".cards_section .info_card:nth-child(2)", { y: "-110vh", duration: 2, ease: "none" }, "-=1.4")
-    .to(".cards_section .info_card:nth-child(3)", { y: "-110vh", duration: 2, ease: "none" }, "-=1.4");
+    cardsTl
+        .to(".cards_section .info_card:nth-child(1)", { y: "-110vh", duration: 2, ease: "none" })
+        .to(".cards_section .info_card:nth-child(2)", { y: "-110vh", duration: 2, ease: "none" }, "-=1.4")
+        .to(".cards_section .info_card:nth-child(3)", { y: "-110vh", duration: 2, ease: "none" }, "-=1.4");
+} else {
+    // mobile: карточки появляются по очереди с задержкой при скролле к секции
+    gsap.utils.toArray(".cards_section .info_card").forEach(function(card, i) {
+        gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".cards_section",
+                start: "top 75%",
+                toggleActions: "play none none none",
+            },
+            delay: i * 0.75,
+        });
+    });
+}
 
 // title_location: появление слов в случайном порядке
 (function () {
