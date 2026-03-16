@@ -570,54 +570,58 @@ window.addEventListener("load", () => {
         if (img.decode) img.decode().catch(() => {});
     });
 
+    const isMobile = window.innerWidth <= 767;
+
     // All panels start collapsed
     items.forEach(item => {
-        gsap.set(item.querySelector('.floorplan-panel'), { height: 0, overflow: 'hidden' });
+        if (!isMobile) gsap.set(item.querySelector('.floorplan-panel'), { height: 0, overflow: 'hidden' });
     });
 
     let openItem = null;
 
     items.forEach(item => {
-        const row    = item.querySelector('.floorplan-row');
-        const panel  = item.querySelector('.floorplan-panel');
-        const icon   = item.querySelector('.toggle-icon');
+        const row  = item.querySelector('.floorplan-row');
+        const panel = item.querySelector('.floorplan-panel');
+        const icon  = item.querySelector('.toggle-icon');
 
         row.addEventListener('click', () => {
             const isOpen = item === openItem;
 
-            const isMobile = window.innerWidth <= 767;
-
             // Close currently open item
             if (openItem) {
                 const closingItem = openItem;
-                gsap.to(closingItem.querySelector('.floorplan-panel'), {
-                    height: 0, duration: 0.4, ease: 'power2.inOut', overwrite: true,
-                    onComplete: () => {
-                        if (!isMobile) {
+                if (isMobile) {
+                    closingItem.classList.remove('is-open');
+                } else {
+                    gsap.to(closingItem.querySelector('.floorplan-panel'), {
+                        height: 0, duration: 0.4, ease: 'power2.inOut', overwrite: true,
+                        onComplete: () => {
                             const y = window.scrollY;
                             ScrollTrigger.refresh();
                             window.scrollTo(0, y);
-                        }
-                    },
-                });
-                closingItem.classList.remove('is-open');
+                        },
+                    });
+                    closingItem.classList.remove('is-open');
+                }
                 closingItem.querySelector('.toggle-icon').textContent = '˅';
                 openItem = null;
             }
 
             // Open clicked item if it was closed
             if (!isOpen) {
-                gsap.to(panel, {
-                    height: 'auto', duration: 0.45, ease: 'power2.inOut', overwrite: true,
-                    onComplete: () => {
-                        if (!isMobile) {
+                if (isMobile) {
+                    item.classList.add('is-open');
+                } else {
+                    gsap.to(panel, {
+                        height: 'auto', duration: 0.45, ease: 'power2.inOut', overwrite: true,
+                        onComplete: () => {
                             const y = window.scrollY;
                             ScrollTrigger.refresh();
                             window.scrollTo(0, y);
-                        }
-                    },
-                });
-                item.classList.add('is-open');
+                        },
+                    });
+                    item.classList.add('is-open');
+                }
                 icon.textContent = '˄';
                 openItem = item;
             }

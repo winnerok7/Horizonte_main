@@ -2234,6 +2234,17 @@ font-family: 'Apercu Mono';
     font-size: 10px;
   }
 
+  .floorplan-panel {
+    height: auto !important;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+  }
+
+  .floorplan-item.is-open .floorplan-panel {
+    max-height: 2000px;
+  }
+
   .contact-block {
     flex-direction: column;
     align-items: center;
