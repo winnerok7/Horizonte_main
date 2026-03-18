@@ -725,7 +725,7 @@ font-family: 'Apercu Mono';
 }
 
 .cards_section{
-  background-image: 
+  background-image:
     linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),
     url('./images/terracec.png');
   object-fit: cover;
@@ -736,6 +736,10 @@ font-family: 'Apercu Mono';
   color: white;
   position: relative;
   overflow: hidden;
+}
+
+.cards_section_mobile {
+  display: none;
 }
 
 .info_card{
@@ -1907,17 +1911,55 @@ font-family: 'Apercu Mono';
   }
 
   .cards_section {
-    background-image: none;
-    background-color: #f5f3ef;
-    min-height: unset;
-    height: auto;
+    display: none;
+  }
+
+  .cards_section_mobile {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 0px 24px 60px;
-    overflow: visible;
+    background-color: #f5f3ef;
+    padding: 15px;
+    gap: 16px;
+  }
+
+  .info_card_mob {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 28px 24px;
+    background-color: #2b2b2b;
+    color: #ffffff;
+    height: 320px;
+  }
+
+  .info_card_mob .title_card {
+    font-size: 28px;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+  }
+
+  .info_card_mob .desc_card {
+    font-size: 12px;
+    line-height: 1.18;
+    color: #ffffff;
+    margin-top: 80px;
+  }
+
+  .image_card_mob {
+    width: 100%;
+    height: 320px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .image_card_mob--1 {
+    background-image: url('./images/trc_card.png');
+  }
+
+  .image_card_mob--2 {
+    background-image: url('./images/Sunrise\ residences.jpeg');
   }
 
   .info_card {
@@ -2074,6 +2116,7 @@ font-family: 'Apercu Mono';
     margin-top: 24px;
     font-size: 28px;
     line-height: 1;
+    width: 100%;
   }
 
   .desc_exterior {
@@ -2092,7 +2135,7 @@ font-family: 'Apercu Mono';
   }
 
   .section-spacer {
-    height: 24vh;
+    height: 4vh;
   }
 
   .sea-section {
