@@ -727,7 +727,7 @@ font-family: 'Apercu Mono';
 .cards_section{
   background-image:
     linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)),
-    url('./images/terracec.png');
+    url('./images/terracec.webp');
   object-fit: cover;
   background-size: cover;
   background-position: center bottom;
@@ -1675,7 +1675,7 @@ font-family: 'Apercu Mono';
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.45);
   z-index: 2;
 }
 
@@ -1955,11 +1955,11 @@ font-family: 'Apercu Mono';
   }
 
   .image_card_mob--1 {
-    background-image: url('./images/trc_card.png');
+    background-image: url('./images/terracec.webp');
   }
 
   .image_card_mob--2 {
-    background-image: url('./images/Sunrise\ residences.jpeg');
+    background-image: url('./images/Sunrise\ residences.webp');
   }
 
   .info_card {
