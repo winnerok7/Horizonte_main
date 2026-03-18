@@ -525,13 +525,15 @@ if (window.innerWidth > 767) {
         e.preventDefault();
         modal.classList.add('is-open');
         document.body.style.overflow = 'hidden';
+        // Lazy load: грузим iframe только при первом открытии
+        if (iframe && !iframe.src) iframe.src = iframe.dataset.src;
     };
 
     const closeModal = () => {
         modal.classList.remove('is-open');
         document.body.style.overflow = '';
         // Останавливаем видео/аудио в iframe сбросом src
-        if (iframe) { const s = iframe.src; iframe.src = ''; iframe.src = s; }
+        if (iframe) iframe.src = '';
     };
 
     btn.addEventListener('click', openModal);
