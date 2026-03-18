@@ -2355,7 +2355,7 @@ font-family: 'Apercu Mono';
   .amenities_mobile {
     display: block;
     background: #f5f3ef;
-    padding: 60px 24px 40px;
+    padding: 60px 16px 40px;
   }
 
   .amenities_mobile__title {
