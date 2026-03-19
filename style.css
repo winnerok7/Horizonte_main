@@ -2031,7 +2031,7 @@ font-family: 'Apercu Mono';
   }
 
   .exterior_section {
-    padding: 120px 8px;
+    padding: 120px 8px 0px;
     gap: 20px;
     display: flex;
     flex-direction: column;
@@ -2112,11 +2112,7 @@ font-family: 'Apercu Mono';
   }
 
   .title_exterior {
-    order: 3;
-    margin-top: 24px;
-    font-size: 28px;
-    line-height: 1;
-    width: 100%;
+    display: none;
   }
 
   .desc_exterior {
